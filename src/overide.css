@@ -1,0 +1,16 @@
+.student-manager .rbc-time-header-gutter {
+    display: none;
+}
+
+.student-manager .rbc-time-content {
+    display: none;
+}
+
+.student-manager .rbc-time-view {
+    border-bottom-color: transparent;
+}
+
+.student-manager .rbc-btn-group:last-child button:last-child {
+    display: none;
+}
+
