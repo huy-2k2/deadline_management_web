@@ -33,15 +33,28 @@ export default function StudentManager() {
     useEffect(() => {
       const newSchedule = Array(7).fill().map(() => [])
       freeTimes.forEach((freeTime, index) => {
+        let class_index = null
         sortPeriod(freeTime).forEach(time => {
           let start_time = new Date(0, 0, 0, time.start.split(":")[0], time.start.split(":")[1]); 
           let end_time = new Date(0, 0, 0, time.end.split(":")[0], time.end.split(":")[1]); 
           let time_ranges = splitTime(start_time, end_time);
           time_ranges.forEach(time_range => {
+            let class_index_temp = null
+            if(classes.length > 1) {
+              while(true) {
+                if(class_index_temp != class_index && class_index_temp != null) {
+                  break
+                }
+                class_index_temp = Math.floor(Math.random() * classes.length)
+              }
+            } else {
+              class_index_temp = Math.floor(Math.random() * classes.length)
+            }
+            class_index = class_index_temp
             newSchedule[index].push({
               start: `${addPrefixToTime(time_range.start.getHours())}:${addPrefixToTime(time_range.start.getMinutes())}`,
               end: `${addPrefixToTime(time_range.end.getHours())}:${addPrefixToTime(time_range.end.getMinutes())}`,
-              class: classes[Math.floor(Math.random() * classes.length)]
+              class: classes[class_index]
             })
           })
         })
@@ -143,9 +156,6 @@ export default function StudentManager() {
         }
       } )
     }
-
-    console.log(schedule);
-
   return (
     <div className='student-manager'>
     <Calendar
@@ -231,7 +241,7 @@ export default function StudentManager() {
                 </thead>
                 <tbody>
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 align-top border-b-transparent">
-                      {schedule.map(item => <td  className=''>
+                      {schedule.map(item => <td className=''>
                         <div className='flex flex-col gap-y-3 px-2'>
                           {item.map(study => <span title={study.class?.name} className='line-clamp-1 bg-green-500 text-white rounded-md px-3 py-1'>
                             {study.start} - {study.end} - {study.class?.name}
