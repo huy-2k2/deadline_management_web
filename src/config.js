@@ -1,4 +1,4 @@
-const BASE_URL = 'https://d439-210-245-52-125.ngrok-free.app/apisầqwe'
+const BASE_URL = 'https://d439-210-245-52-125.ngrok-free.app/apeqweqweisầqwe'
 const PUSHER_APP_KEY = '2a7395e5789e352bdad0'
 const PUSHER_CLUSTER = 'ap1'
 export {BASE_URL, PUSHER_APP_KEY, PUSHER_CLUSTER}
